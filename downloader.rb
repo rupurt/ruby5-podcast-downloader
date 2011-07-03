@@ -5,7 +5,7 @@ require "httparty"
 def format_episode(episode)
   if episode < 10
     "00#{episode}"
-  elsif episode
+  elsif episode < 100
     "0#{episode}"
   else
     episode.to_s
