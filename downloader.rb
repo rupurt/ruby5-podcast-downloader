@@ -19,8 +19,14 @@ end
 
 def check_args
   Trollop::die :from, "must be non negative" if @opts[:from] < 0
-  Trollop::die :to, "must be an integer >= 1" if @opts[:to].blank?
+  Trollop::die :to, "must be an integer >= 1" if @opts[:to] == nil || @opts[:to] < 1
   Trollop::die :to, "must be greater or equal to episode from" if @opts[:to] < @opts[:from]
+end
+
+def create_download_directory
+  unless FileTest::directory?("episodes")
+    Dir::mkdir("episodes")
+  end
 end
 
 def download
@@ -62,4 +68,5 @@ end
 end
 
 check_args
+create_download_directory
 download
